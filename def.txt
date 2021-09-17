@@ -1,0 +1,8 @@
+def get_velocity_lag(xi, T, S):   
+    """INTERPOLATES PERTURBATION VELOCITY DUE TO LAG"""
+    if xi < T[0]: return S[0]
+    if xi > T[-1]: return S[-1]
+    geq = np.argwhere(xi >= T) 
+    leq = np.argwhere(xi <= T) 
+    loc = (xi - T[geq[-1]])/(T[leq[0]] - T[geq[-1]]) 
+    return S[geq[-1]] + loc*(S[leq[0]] - S[leq[-1]]) 
